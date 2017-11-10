@@ -1,0 +1,72 @@
+<Configuration status="WARN" monitorInterval="300">
+	<properties>
+		<property name="LOG_HOME">D:/logs</property>
+	</properties>
+	<Appenders>
+		<Console name="Console" target="SYSTEM_OUT">
+			<PatternLayout pattern="%d{HH:mm:ss.SSS} [%t] %-5level %logger{36} - %msg%n" />
+		</Console>
+
+		<RollingRandomAccessFile name="InfoFile"
+			fileName="${LOG_HOME}/info.log" filePattern="${LOG_HOME}/$${date:yyyy-MM}/info-%d{yyyy-MM-dd}-%i.log">
+			<Filters>
+				<ThresholdFilter level="warn" onMatch="DENY"
+					onMismatch="NEUTRAL" />
+				<ThresholdFilter level="trace" onMatch="ACCEPT"
+					onMismatch="DENY" />
+			</Filters>
+			<PatternLayout
+				pattern="%date{yyyy-MM-dd HH:mm:ss.SSS} %level [%thread][%file:%line] - %msg%n" />
+			<Policies>
+				<TimeBasedTriggeringPolicy />
+				<SizeBasedTriggeringPolicy size="10 MB" />
+			</Policies>
+			<DefaultRolloverStrategy max="10" />
+		</RollingRandomAccessFile>
+
+		<RollingRandomAccessFile name="ErrorFile"
+			fileName="${LOG_HOME}/error.log" filePattern="${LOG_HOME}/$${date:yyyy-MM}/error-%d{yyyy-MM-dd}-%i.log">
+			<Filters>
+				<ThresholdFilter level="fatal" onMatch="DENY"
+					onMismatch="NEUTRAL" />
+				<ThresholdFilter level="warn" onMatch="ACCEPT"
+					onMismatch="DENY" />
+			</Filters>
+			<PatternLayout
+				pattern="%date{yyyy-MM-dd HH:mm:ss.SSS} %level [%thread][%file:%line] - %msg%n" />
+			<Policies>
+				<TimeBasedTriggeringPolicy />
+				<SizeBasedTriggeringPolicy size="10 MB" />
+			</Policies>
+			<DefaultRolloverStrategy max="10" />
+		</RollingRandomAccessFile>
+
+		<RollingRandomAccessFile name="FatalFile"
+			fileName="${LOG_HOME}/fatal.log" filePattern="${LOG_HOME}/$${date:yyyy-MM}/fatal-%d{yyyy-MM-dd}-%i.log">
+			<Filters>
+				<ThresholdFilter level="fatal" onMatch="ACCEPT"
+					onMismatch="DENY" />
+			</Filters>
+			<PatternLayout
+				pattern="%date{yyyy-MM-dd HH:mm:ss.SSS} %level [%thread][%file:%line] - %msg%n" />
+			<Policies>
+				<TimeBasedTriggeringPolicy />
+				<SizeBasedTriggeringPolicy size="10 MB" />
+			</Policies>
+			<DefaultRolloverStrategy max="10" />
+		</RollingRandomAccessFile>
+	</Appenders>
+
+	<Loggers>
+		<!-- 打印 mybatis语句方便开发调式 -->
+		<logger name="org.springframework" level="INFO"></logger>
+		<logger name="org.mybatis" level="INFO"></logger>
+		<!-- 开发环境用debug 并且配置上面两个logger。 正式环境 改为 info或者warn -->
+		<Root level="debug">
+			<AppenderRef ref="Console" />
+			<AppenderRef ref="InfoFile" />
+			<AppenderRef ref="ErrorFile" />
+			<AppenderRef ref="FatalFile" />
+		</Root>
+	</Loggers>
+</Configuration>
