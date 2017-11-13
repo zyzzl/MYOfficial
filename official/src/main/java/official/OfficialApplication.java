@@ -8,10 +8,10 @@ import org.springframework.context.annotation.Bean;
 import javax.servlet.MultipartConfigElement;
 
 @SpringBootApplication
-public class MybusinessApplication {
+public class OfficialApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(MybusinessApplication.class, args);
+		SpringApplication.run(OfficialApplication.class, args);
 	}
 
 	/**增加上传文件最大数

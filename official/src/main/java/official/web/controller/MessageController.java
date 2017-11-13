@@ -63,4 +63,9 @@ public class MessageController {
 		map.put("userList", list);
 		return null;
 	}
+	
+	@RequestMapping("test")
+	public String test(){
+		return "news";
+	}
 }
