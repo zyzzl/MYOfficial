@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+
+<script type="text/javascript" src="../js/jquery-1.11.1.min.js"></script>
+<script type="text/javascript" src="../js/wangEditor.js"></script>
+
+<script type="text/javascript">
+	$(function(){
+		var E = window.wangEditor
+        var editor = new E('#editor')
+        // 或者 var editor = new E( document.getElementById('#editor') )
+        editor.create();
+	});	
+</script>
+
+</head>
+<body>
+	<div id="editor">
+	</div>
+</body>
+</html>

@@ -60,7 +60,7 @@ public class MessageController {
 		Page page = new Page(pageIndex, pageSize, totalCount);
 		List<Message> list = messageService.queryMessageList(pageIndex, pageSize);
 		page.setT(list);
-		map.put("userList", list);
+		map.put("messageList", list);
 		return null;
 	}
 	
